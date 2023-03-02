@@ -1,0 +1,37 @@
+.custom-bg-color{
+    background-color: #E4C2C1;
+}
+
+.offcanvas{
+    background-color: #E4C2C1;
+}
+
+.offcanvas-body{
+    text-align: center;
+    padding: 10px;
+}
+
+.offcanvas.offcanvas-start{
+    width: 250px;
+}
+.adminSidebar{
+    padding: 20PX;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    background-color: #efcecd;
+}
+
+.offcanvas-header{
+    color: #642637;
+}
+
+.driverOptions button{
+    background-color: #642637;
+    width: 200px;
+    margin-top: 15px;
+}
+
+.driverOptions button:hover{
+    background-color: #6d3342;
+}

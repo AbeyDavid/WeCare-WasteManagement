@@ -1,0 +1,7 @@
+.bannerimg{
+    filter: brightness(30%);
+}
+.bannerimage{
+    max-width: 100%;
+    height: 500px;
+}

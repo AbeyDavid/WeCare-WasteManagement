@@ -1,0 +1,59 @@
+a,
+button {
+    cursor: pointer;
+}
+
+@keyframes pan {
+    100% {
+        background-position: 15% 50%;
+    }
+}
+
+.mainbody {
+    height: 100vh;
+    background-image: url("../../public/svg/bg.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    animation: pan 10s infinite alternate linear;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-card {
+    background-color: #fff;
+    width: 320px;
+    height: 400px;
+    text-align: center;
+    align-items: center;
+}
+
+.login-card h2{
+    margin-top: 20px;
+    color: #122d7d;
+    padding: 10px;
+}
+
+.login-form{
+    margin-top: 10px;
+    text-align: center;
+    padding: 20px;
+}
+
+.MuiFormControl-root,
+.MuiTextField-root {
+  width: 80%;
+  margin-bottom: 16px; 
+}
+
+.fp{
+    color: #000;
+    margin-top: 22px;
+}
+.fp :hover{
+    color: rgb(2, 2, 160);
+}
+
+.heading{
+    color: rgb(90, 90, 198);
+}
