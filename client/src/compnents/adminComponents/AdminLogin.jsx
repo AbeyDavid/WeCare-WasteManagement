@@ -6,6 +6,7 @@ import { adminLogin } from "../../services/adminApi";
 import { useDispatch } from "react-redux";
 import { setAdminLogin } from "../../store/adminSlice";
 import { useNavigate } from "react-router-dom";
+import Button from "@mui/material/Button";
 
 export default function AdminLogin() {
     const [message, setMessage] = useState("");
@@ -22,6 +23,12 @@ export default function AdminLogin() {
     const onSubmit = async (values, props) => {
         try {
             const adminLoginResponse = await adminLogin(values);
+            if (adminLoginResponse.msg) {
+                setMessage(adminLoginResponse.msg)
+                setTimeout(() => {
+                    setMessage("")
+                }, 4000);
+            }
             if (adminLoginResponse.token) {
                 dispatch(setAdminLogin(adminLoginResponse.token));
                 navigate("/admin");
@@ -67,6 +74,7 @@ export default function AdminLogin() {
                         </Form>
                     )}
                 </Formik>
+                <Button className="mt-2" variant="text" onClick={()=>{navigate("/")}} >Home Page</Button>
             </div>
         </div>
     );

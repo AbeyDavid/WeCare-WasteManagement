@@ -1,0 +1,19 @@
+
+.comment-wrapper .panel-body {
+    max-height:650px;
+}
+
+.comment-wrapper .media-list .media img {
+    width:64px;
+    height:64px;
+    border:2px solid #0b8ac9;
+}
+
+.comment-wrapper .media-list .media {
+    border-bottom:1px dashed #ffffff;
+    margin-bottom:25px;
+}
+
+.containerbody{
+    background-color: #E4C2C1;
+}

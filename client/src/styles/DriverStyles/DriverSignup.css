@@ -20,12 +20,12 @@
     margin-bottom: 3%;
     cursor: pointer;
 }
-.login-right{
+.register-right{
     background: #f8f9fa;
     border-top-left-radius: 10% 50%;
     border-bottom-left-radius: 10% 50%;
     max-width: 72%;
-    margin-top: 55px;
+    margin-top: 5px;
 }
 .register-left img{
     margin-top: 15%;
@@ -57,8 +57,8 @@
     border: none;
     border-radius: 1.5rem;
     padding: 2%;
-    background: #039bfa;
-    color: #fffdfd;
+    background: #0062cc;
+    color: #fff;
     font-weight: 600;
     width: 50%;
     cursor: pointer;

@@ -53,7 +53,9 @@ header {
     color: var(--main-color) !important;
 }
 
-
+.fp {
+    color: #1730eb;
+}
 
 .main {
     display: flex;
@@ -125,27 +127,29 @@ header {
     }
 }
 
-
 .open > .dropdown-menu {
     -webkit-transform: scale(1, 1);
-    transform: scale(1, 1);  
-    opacity:1;
-  }
-    
-  .dropdown-menu {
-    opacity:.3;
+    transform: scale(1, 1);
+    opacity: 1;
+}
+
+.dropdown-menu {
+    opacity: 0.3;
     -webkit-transform-origin: top;
     transform-origin: top;
-    -webkit-animation-fill-mode: forwards;  
-    animation-fill-mode: forwards; 
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
     -webkit-transform: scale(1, 0);
-    display: block; 
+    display: block;
     transition: all 0.3s linear;
     -webkit-transition: all 0.3s linear;
-  }
-  
-  .dropdown-menu {
+}
+
+.dropdown-menu {
     background-color: transparent;
     border: none;
-  }
-  
+}
+
+.googleAuthBtn{
+    width: 250px !important
+}

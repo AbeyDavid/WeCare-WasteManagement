@@ -1,32 +1,16 @@
-import React from "react";
-import { Box, Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from "@mui/material";
-
-import pic1 from "../../public/images/1.jpg";
-import pic2 from "../../public/images/2.jpg";
-import pic3 from "../../public/images/3.jpg";
+import React, { useEffect } from "react";
+import { Box, Button, Card, CardContent, CardMedia, Grid, Typography } from "@mui/material";
+import { getServices } from "../../services/adminApi";
 
 export default function Service() {
-    const serviceDetails = [
-        {
-            service: "Residential Garbage Pickup",
-            discription:
-                "Residential garbage pickup is important for public health, environmental protection, aesthetics, and convenience.It is a critical service that helps maintain a healthy and livable community.",
-            image: pic1,
-        },
-        {
-            service: "Restaurants waste management",
-            discription:
-                "Effective restaurant waste management is important for environmental protection, health and safety. By implementing effective waste management practices, restaurants can help protect the environment, save money, and improve their reputation.",
-            image: pic2,
-        },
-        {
-            service: "Waste Management in Events",
-            discription:
-                " Events generate a significant amount of waste, including food waste, packaging, and decorations. Proper waste management, including recycling and composting, can help reduce the amount of waste that goes to landfills, which can harm the environment.",
-            image: pic3,
-        },
-    ];
-
+    const [serviceData, setServiceData] = React.useState([]);
+    useEffect(()=>{
+        async function fetchData() {
+            const result = await getServices();
+            setServiceData(result.serviceData);
+        }
+        fetchData();
+    },[])
     return (
         <div>
             <Typography variant="h5" sx={{ textAlign: "center", padding: "20px", fontWeight: "500" }}>
@@ -34,9 +18,9 @@ export default function Service() {
             </Typography>
 
             <Grid container spacing={2} justifyContent={"center"}>
-                {serviceDetails.map((item, index) => {
+                {serviceData.map((item) => {
                     return (
-                        <Grid key={index} item xs={12} sm={6} md={4}>
+                        <Grid key={item._id} item xs={12} sm={6} md={4}>
                             <Box
                                 sx={{
                                     padding: "35px",
@@ -60,7 +44,7 @@ export default function Service() {
                                             variant="h5"
                                             sx={{ height: "63px", overflow: "hidden", color: "white" }}
                                         >
-                                            {item.service}
+                                            {item.serviceName}
                                         </Typography>
                                         <Typography
                                             variant="body2"
@@ -73,7 +57,7 @@ export default function Service() {
                                                 fontSize: "12PX",
                                             }}
                                         >
-                                            {item.discription}
+                                            {item.serviceDetails}
                                         </Typography>
                                     </CardContent>
                                     <Box
@@ -106,6 +90,7 @@ export default function Service() {
                     );
                 })}
             </Grid>
+
         </div>
     );
 }

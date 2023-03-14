@@ -1,60 +1,128 @@
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { FormControl, Input, InputLabel, TextField, InputAdornment, IconButton, Button } from "@mui/material";
-import React from "react";
+import { Button } from "@mui/material";
+import React, { useState } from "react";
+import { Formik, Form, Field } from "formik";
+import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import "../../styles/DriverStyles/DriverLogin.css";
-
-export default function DriverLogin() {
-    const [showPassword, setShowPassword] = React.useState(false);
+import { driverLogin } from "../../services/driverApi";
+import { useDispatch } from "react-redux";
+import { setDriverLogin } from "../../store/driverSlice";
+export default function DriverSignup() {
+    const [msg, setMsg] = useState("");
+    const dispatch = useDispatch();
     const navigate = useNavigate();
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-    const handleMouseDownPassword = (event) => {
-        event.preventDefault();
+    const initialValues = {
+        email: "",
+        password: "",
     };
-
-    function handleClickToHome() {
-        navigate("/");
-    }
-    function handleClickToDriverHome(){
-        navigate("/driver/driverHome");
-    }
-
+    const validationSchema = Yup.object().shape({
+        email: Yup.string().email("Invalid email").required("Email is required"),
+        password: Yup.string().min(6, "Password must be at least 6 characters").required("Password is required"),
+    });
+    const onSubmit = async (values) => {
+        try {
+            const driver = {
+                email: values.email,
+                password: values.password,
+            };
+            const result = await driverLogin(driver);
+            if (result.msg) {
+                setMsg(result.msg);
+                setTimeout(() => {
+                    setMsg("");
+                }, 4000);
+            } else if (result.token) {
+                dispatch(
+                    setDriverLogin({
+                        token: result.token,
+                        driverData: result.driverData,
+                    })
+                );
+                navigate("/driver/driverHome");
+            }
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
     return (
-        <div className="mainbody">
-            <div className="login-card">
-                <h2>Driver Login</h2>
-                <form className="login-form">
-                    <TextField id="standard-basic" label="Email" variant="standard" />
-                    <FormControl variant="standard" sx={{ marginTop: "10px" }}>
-                        <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
-                        <Input
-                            id="standard-adornment-password"
-                            type={showPassword ? "text" : "password"}
-                            endAdornment={
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={handleClickShowPassword}
-                                        onMouseDown={handleMouseDownPassword}
+        <div>
+            <div class="register">
+                <div class=" row ">
+                    <div class="col-md-3  register-left">
+                        <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
+                        <h3>Welcome</h3>
+                        <p>Start Your New Journey With WeCare !</p>
+                        <br />
+                        <button onClick={() => navigate("/driver/driverSignup")} class="btn btn-light">
+                            Signup
+                        </button>
+                    </div>
+                    <div class="col-md-9 login-right">
+                        <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link active"
+                                    id="home-tab"
+                                    data-toggle="tab"
+                                    href="#home"
+                                    role="tab"
+                                    aria-controls="home"
+                                    aria-selected="true"
+                                    onClick={() => navigate("/")}
+                                >
+                                    Home
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <h3 class="register-heading">Driver Login</h3>
+                                <div class="row register-form">
+                                    <Formik
+                                        initialValues={initialValues}
+                                        validationSchema={validationSchema}
+                                        onSubmit={onSubmit}
                                     >
-                                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                        />
-                    </FormControl>
-                    <p className="fp">
-                        <a>Forget Password?</a>
-                    </p>
-                    <Button variant="outlined" sx={{ marginTop: "20px" }} onClick={handleClickToDriverHome}>
-                        Login
-                    </Button>
-                </form>
-                <Button variant="text" sx={{ marginBottom: "20px" }} onClick={handleClickToHome}>
-                    Back To Home
-                </Button>
+                                        {({ errors, touched }) => (
+                                            <Form>
+                                                <div class="col-md-6">
+                                                    {msg && <p class="text-danger">{msg}</p>}
+                                                    <div class="form-group">
+                                                        <Field
+                                                            type="email"
+                                                            name="email"
+                                                            class="form-control"
+                                                            placeholder="Your Email *"
+                                                        />
+                                                        {errors.email && touched.email ? (
+                                                            <p className="text-danger">{errors.email}</p>
+                                                        ) : null}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <Field
+                                                            type="password"
+                                                            name="password"
+                                                            class="form-control"
+                                                            placeholder="Password *"
+                                                        />
+                                                        {errors.password && touched.password ? (
+                                                            <p className="text-danger">{errors.password}</p>
+                                                        ) : null}
+                                                    </div>
+                                                    <Button type="submit" class="btnRegister">
+                                                        Login
+                                                    </Button>
+                                                </div>
+                                            </Form>
+                                        )}
+                                    </Formik>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );

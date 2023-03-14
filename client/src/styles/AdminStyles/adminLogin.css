@@ -1,7 +1,7 @@
 
 .login-page {
     position: absolute;
-    background: #3ca2e0;
+    background: #E4C2C1;
     text-align: center;
     color: #fff;
     padding: 3em;
@@ -50,16 +50,16 @@
 }
 
 input[type='text']::-webkit-input-placeholder, input[type='password']::-webkit-input-placeholder { 
-    color:    #fff;
+    color:    #000000;
 }
 input[type='text']:-moz-placeholder, input[type='password']:-moz-placeholder { 
-    color:    #fff;
+    color:    #000000;
 }
 input[type='text']::-moz-placeholder, input[type='password']::-moz-placeholder { 
-    color:    #fff;
+    color:    #000000;
 }
 input[type='text']:-ms-input-placeholder, input[type='password']:-ms-input-placeholder { 
-    color:    #fff;
+    color:    #000000;
 }
 
 .adminContainer {

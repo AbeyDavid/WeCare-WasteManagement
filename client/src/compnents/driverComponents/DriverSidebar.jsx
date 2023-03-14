@@ -1,5 +1,5 @@
 import React from "react";
-import SideNav, { Toggle, NavItem, NavIcon, NavText } from "@trendmicro/react-sidenav";
+import SideNav, { NavItem, NavIcon, NavText } from "@trendmicro/react-sidenav";
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";
 import "../../styles/DriverStyles/DriverSidebar.css";
 import HomeIcon from "@mui/icons-material/Home";
@@ -8,11 +8,16 @@ import NotificationAddIcon from "@mui/icons-material/NotificationAdd";
 import AltRouteIcon from "@mui/icons-material/AltRoute";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setDriverLogout } from "../../store/driverSlice";
 
 export default function DriverSidebar() {
     const navigate = useNavigate();
-    function handleLogout() {
+    const dispatch = useDispatch();
+    function driverLogout() {
         console.log("logout");
+        dispatch(setDriverLogout())
+        navigate("/driver/driverLogin")
     }
     return (
         <div className="sidebarBody">
@@ -49,12 +54,9 @@ export default function DriverSidebar() {
                         </NavIcon>
                         <NavText>Routes</NavText>
                     </NavItem>
-                    <NavItem onClick={handleLogout}>
-                        <NavIcon>
-                            <LogoutIcon />
-                        </NavIcon>
-                        <NavText>Logout</NavText>
-                    </NavItem>
+                    <button onClick={driverLogout} className="btn text-light">
+                        <LogoutIcon />
+                    </button>
                 </SideNav.Nav>
             </SideNav>
         </div>

@@ -2,6 +2,8 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import adminReducer from './adminSlice'
+import userReducer from './userSlice'
+import driverReducer from './driverSlice'
 
 const persistConfig = {
     key: "persist-key",
@@ -9,7 +11,9 @@ const persistConfig = {
 };
 
 const reducers = combineReducers({
-    admin: adminReducer
+    admin: adminReducer,
+    user: userReducer,
+    driver: driverReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);
